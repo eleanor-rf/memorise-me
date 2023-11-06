@@ -8,14 +8,16 @@
     <link rel="preconnect" href="https://rsms.me/">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 </head>
-<body>
+<body class = "manageCards">
     <div class="container">
     <div><h1>You don't have any cards.</h1></div>
-    <div class="card" style="cursor: pointer">Upload .csv</div>
+    <div class="card"><input type="file" id="csvFileInput" accept=".csv">
+<button id="uploadButton">Upload and Convert</button></div>
     <div class="card" style="cursor: pointer">Create card set</div>
     </div>
 
-
+<script src="./js/script.js" type="module" defer></script>
 </body>
 </html>
