@@ -3,6 +3,10 @@
   :root { font-family: 'Inter var', sans-serif; }
 }
 
+.html {
+    min-height: 100%;
+}
+
 body {
     display: flex;
     align-items: center;
@@ -10,8 +14,8 @@ body {
     height: 100dvh;
     font-size: 2rem;
     background: #ad5389;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(300deg, #3c1053, #ad5389);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(300deg, #3c1053, #ad5389); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(300deg, #3c1053, #ad5389), fixed;  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(300deg, #3c1053, #ad5389), fixed; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     color: #fffff4;
     margin: 0;
     padding: 0;
@@ -37,6 +41,12 @@ h1 {
     align-items: center;
 }
 
+.signOut {
+    position: absolute;
+    top: 0;
+    left: 1rem;
+}
+
 .practice {
     flex-direction: column;
 }
@@ -54,7 +64,9 @@ h1 {
 .rating-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 1.5rem;
+    justify-content: center;
 }
 
 .zero {
@@ -95,8 +107,8 @@ h1 {
 
 .flashcard {
     font-size: 1.3rem;
-    width: 75vw;
-    height: 50vh;
+    width: 80vw;
+    height: 60vh;
 }
 
 @media (max-width: 700px){
