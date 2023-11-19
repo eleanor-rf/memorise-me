@@ -4,6 +4,7 @@ Flashcard web app. Live at [https://memorise-me.web.app/](https://memorise-me.we
 Work in progress!
 
 ## Current features
+* Simple and responsive web layout using Flexbox and media queries
 * Sign up and sign in and out using Firebase Authentication
 * Upload a .csv of flashcards which is parsed into JSON using [PapaParse](https://github.com/mholt/PapaParse)
 * Flashcards are stored in Firestore attached to the user's unique ID
