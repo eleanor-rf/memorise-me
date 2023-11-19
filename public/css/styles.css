@@ -94,8 +94,9 @@ h1 {
 }
 
 .card {
-    height: 200px;
+    height: 30dvh;
     width: 40dvw;
+    max-width: 400px;
     border: 3px solid #000;
     display: flex;
     align-items: center;
@@ -107,8 +108,16 @@ h1 {
 
 .flashcard {
     font-size: 1.3rem;
-    width: 80vw;
-    height: 60vh;
+    width: 70dvw;
+    height: 60dvh;
+    text-align: center;
+    border: 3px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 10px 10px #000;
+    background-color: #FFFFF4;
+    color: #000;
 }
 
 @media (max-width: 700px){
