@@ -108,7 +108,8 @@ h1 {
 
 .flashcard {
     font-size: 1.3rem;
-    width: 70dvw;
+    width: 80dvw;
+    max-width: 1000px;
     height: 60dvh;
     text-align: center;
     border: 3px solid #000;
@@ -128,4 +129,5 @@ h1 {
     .card {
         width: 80dvw;
     }
+
 }
