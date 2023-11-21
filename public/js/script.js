@@ -156,37 +156,25 @@ const dueQuestions = Object.keys(data)
 dueQuestions.sort((a, b) => a - b);
 console.log(dueQuestions);
 
-let i = 0;
 let isQuestionDisplayed = false;
 
 //code for flashcard container - display correct Qs and toggle between Q and A on click
 // TO DO - add flipping animation
 document.getElementById('flashcardContainer').addEventListener("click", function() {
-  if ((i > dueQuestions.length) || (dueQuestions.length === 0)) {
-      document.getElementById('flashcardContainer').innerHTML = 'All done for today :) come back tomorrow!';
+  if ((i >= dueQuestions.length - 1) || (dueQuestions.length === 0)) {
+      document.getElementById('flashcardContainer').textContent = 'All done for today :) come back tomorrow!';
     }
       else if (isQuestionDisplayed === false){
       let questionField = "question" + dueQuestions[i];
       isQuestionDisplayed = true;
-      document.getElementById('flashcardContainer').innerHTML = data[questionField];
+      document.getElementById('flashcardContainer').textContent = data[questionField];
         }
         else if (isQuestionDisplayed === true) {
           let answerField = "answer" + dueQuestions[i];
-          document.getElementById('flashcardContainer').innerHTML = data[answerField];
+          document.getElementById('flashcardContainer').textContent = data[answerField];
           isQuestionDisplayed = false;
         }
     });
-
-document.getElementById('ratingContainer').addEventListener("click", function() {
-    if ((i >= dueQuestions.length) || (dueQuestions.length === 0)) {
-      document.getElementById('flashcardContainer').innerHTML = 'All done for today :) come back tomorrow!';
-    } else {
-      let questionField = "question" + dueQuestions[i];
-      document.getElementById('flashcardContainer').innerHTML = data[questionField];
-      isQuestionDisplayed = true;
-      i++;
-    }
-  });
 
 // implement supermemo2 algorithm
 async function findNextDate(i,rating){
@@ -232,17 +220,26 @@ await updateDoc(doc(db, 'user-flashcards', uid), {
   });
 }
 
-//when user clicks on one of the 6 rating containers, 0-6, update the next date for the current question from dueQuestions array
+//when user clicks on one of the 6 rating containers, 0-5, update the next date for the current question from dueQuestions array
+//and display the next question from dueQuestions
+let i = 0;
 for (let j = 0; j <= 5; j++) {
     document.getElementById(`rate${j}`).addEventListener("click", function() {
       if (dueQuestions.length >= 1) {
         findNextDate(dueQuestions[i], j); }
+      if ((i >= dueQuestions.length - 1) || (dueQuestions.length === 0)){
+      document.getElementById('flashcardContainer').textContent = 'All done for today :) come back tomorrow!';
+      } else {
+      i++;
+      console.log(i);
+      let questionField = "question" + dueQuestions[i];
+      document.getElementById('flashcardContainer').textContent = data[questionField];
+      isQuestionDisplayed = true;
+      }
     });
 }
-
-    }
-  });
-
+}
+});
 };
 
 });
