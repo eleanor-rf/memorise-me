@@ -15,13 +15,10 @@ const db = getFirestore(app);
 const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/auth.user
     const uid = user.uid;
     if (window.location.pathname.includes("index.html")) {
     window.location.href = './access.html';
     }
-    else { }
   } else {
     if (window.location.pathname.includes("index.html")) { }
     else { window.location.href = 'index.html'; }
@@ -36,11 +33,11 @@ if($('body').hasClass('logInPage')){
     signUpBtn.addEventListener('click', () => {
         const email = document.getElementById('emailInput').value;
         const password = document.getElementById('passwordInput').value;
-        const auth = getAuth(); // Get the Auth object
+        const auth = getAuth();
 
 createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    // Signed up 
+    // signed up 
     const user = userCredential.user;
     // ...
   })
@@ -71,8 +68,8 @@ signInWithEmailAndPassword(auth, email, password)
 });
 };
 
-// sign out - fix the hasclass later once every page has a sign out button!
-if ($('body').hasClass('accessCards')) {
+// sign out
+if (!$('body').hasClass('logInPage')) {
 const signOutButton = document.getElementById('signOutButton');
 signOutButton.addEventListener('click', () => {
 const auth = getAuth();
@@ -161,7 +158,8 @@ let isQuestionDisplayed = false;
 //code for flashcard container - display correct Qs and toggle between Q and A on click
 // TO DO - add flipping animation
 document.getElementById('flashcardContainer').addEventListener("click", function() {
-  if ((i >= dueQuestions.length - 1) || (dueQuestions.length === 0)) {
+  console.log(i, dueQuestions.length);
+  if ((i > dueQuestions.length - 1) || (dueQuestions.length === 0)) {
       document.getElementById('flashcardContainer').textContent = 'All done for today :) come back tomorrow!';
     }
       else if (isQuestionDisplayed === false){
@@ -226,15 +224,16 @@ let i = 0;
 for (let j = 0; j <= 5; j++) {
     document.getElementById(`rate${j}`).addEventListener("click", function() {
       if (dueQuestions.length >= 1) {
-        findNextDate(dueQuestions[i], j); }
+        findNextDate(dueQuestions[i], j); } //calculate the next date for question[i]
       if ((i >= dueQuestions.length - 1) || (dueQuestions.length === 0)){
-      document.getElementById('flashcardContainer').textContent = 'All done for today :) come back tomorrow!';
+        i++;
+        document.getElementById('flashcardContainer').textContent = 'All done for today :) come back tomorrow!';
       } else {
-      i++;
-      console.log(i);
-      let questionField = "question" + dueQuestions[i];
-      document.getElementById('flashcardContainer').textContent = data[questionField];
-      isQuestionDisplayed = true;
+        i++; //move on to the next question
+        //console.log(i);
+        let questionField = "question" + dueQuestions[i];
+        document.getElementById('flashcardContainer').textContent = data[questionField]; //display the next question
+        isQuestionDisplayed = true; //now clicking the container will show the answer to the current Q
       }
     });
 }
