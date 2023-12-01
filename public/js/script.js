@@ -5,10 +5,8 @@ import firebaseConfig from './config.js';
 
 document.addEventListener("DOMContentLoaded", function() {
 
-// Initialise Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
 //logged in already? bypass login page
@@ -28,8 +26,6 @@ onAuthStateChanged(auth, (user) => {
 // sign up
 if($('body').hasClass('logInPage')){
     const signUpBtn = document.getElementById('signUpBtn');
-    const errorMessage = document.getElementById('errorMessage');
-
     signUpBtn.addEventListener('click', () => {
         const email = document.getElementById('emailInput').value;
         const password = document.getElementById('passwordInput').value;
@@ -37,15 +33,8 @@ if($('body').hasClass('logInPage')){
 
 createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    // signed up 
     const user = userCredential.user;
-    // ...
   })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
     });
 };
 
@@ -54,17 +43,12 @@ if($('body').hasClass('logInPage')){
 signInBtn.addEventListener('click', () => {
         const email = document.getElementById('emailInput').value;
         const password = document.getElementById('passwordInput').value;
-        const auth = getAuth(); // Get the Auth object
+        const auth = getAuth();
 signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    // Signed in 
     const user = userCredential.user;
     window.location.href = './access.html';
   })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
 });
 };
 
@@ -75,9 +59,7 @@ signOutButton.addEventListener('click', () => {
 const auth = getAuth();
 signOut(auth).then(() => {
   window.location.href = './index.html';
-}).catch((error) => {
-  // An error happened.
-});
+})
 });
 };
 
@@ -109,7 +91,6 @@ if ($('body').hasClass('manageCards')) {
                   acc[`eFactor${index}`] = 2.5;
                   acc[`interval${index}`] = 1;
                   acc[`repetition${index}`] = 0;
-                  // acc[`lastRating${index}`] = null; //maybe not needed
                   }
                   return acc;
                   }, {});
